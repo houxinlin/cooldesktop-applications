@@ -1,7 +1,13 @@
 package com.cooldesktop.app.upload.chunk;
 
+import com.cooldesktop.app.upload.utils.FileUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.util.FileSystemUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.DelayQueue;
@@ -16,9 +22,19 @@ public class TaskManager {
     private volatile boolean exitFlag = false;
     private Thread taskConsumerThread = null;
 
+    /**
+     * 卸载APP
+     */
     public void uninstall() {
         this.exitFlag = true;
         if (taskConsumerThread != null) taskConsumerThread.interrupt();
+        //删除文件存储目录
+        try {
+            FileSystemUtils.deleteRecursively(Paths.get(FileUtils.getStorageWorkPath()));
+            Files.deleteIfExists(Paths.get(FileUtils.getConfigWorkPath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public TaskManager() {
@@ -26,7 +42,9 @@ public class TaskManager {
             while (!exitFlag) {
                 try {
                     DeleteDirectorTask take = delayQueue.take();
-                } catch (InterruptedException e) {
+                    //删除临时目录
+                    FileSystemUtils.deleteRecursively(Paths.get(FileUtils.getStorageWorkPath(), take.uuid));
+                } catch (InterruptedException | IOException e) {
                 }
             }
         });

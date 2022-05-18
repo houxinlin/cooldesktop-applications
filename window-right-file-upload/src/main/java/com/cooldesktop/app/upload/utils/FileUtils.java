@@ -16,12 +16,13 @@ public class FileUtils {
         try {
             Path path = Paths.get(System.getProperty("user.dir"), "work", "config");
             if (!Files.exists(path)) Files.createDirectories(path);
-            return path.toString();
+            return Paths.get(path.toString(), "right-upload-token.cfg").toString();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
+
 
     public static String getStorageWorkPath() {
         try {

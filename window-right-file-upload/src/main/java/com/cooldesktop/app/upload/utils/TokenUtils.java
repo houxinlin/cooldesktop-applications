@@ -7,16 +7,13 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 
 public class TokenUtils {
     public static String getToken() {
         try {
-            Path path = Paths.get(FileUtils.getConfigWorkPath(), "right-upload-token.cfg");
+            Path path = Paths.get(FileUtils.getConfigWorkPath());
             if (Files.exists(path)) {
                 String token = new String(Files.readAllBytes(path));
                 if (StringUtils.hasText(token)) return token;

@@ -31,12 +31,19 @@
             color: #fafafa;
             cursor: pointer;
         }
+        a{
+            text-decoration: none;
+            color: #35a96a;
+            font-size: 12px;
+            margin: 15px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div th:text="${token}" id="token" class="token">a</div>
         <button id="copyBtn">复制</button>
+        <a href="/asr/100006/static/cool-upload.exe">下载客户端</a>
     </div>
     <script>
         document.getElementById("copyBtn")
@@ -47,6 +54,7 @@
                     document.getElementById("copyBtn").innerText="已复制"
                 })
                 .catch(err => {
+                    alert("复制失败")
                 });
         }
     </script>

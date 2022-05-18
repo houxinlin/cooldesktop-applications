@@ -35,7 +35,10 @@ public class UploadController implements ApplicationContextAware {
 
     @GetMapping("/task/create")
     @ResponseBody
-    public String createId() {
+    public String createId(  @RequestHeader(value = "token", required = false, defaultValue = "") String token) {
+        if (!TokenUtils.getToken().equals(token)) {
+            return "-2";
+        }
         return taskManager.generatorTaskId();
     }
 
