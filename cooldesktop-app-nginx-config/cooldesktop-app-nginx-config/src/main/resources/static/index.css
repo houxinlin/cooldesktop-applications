@@ -1,0 +1,110 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+.empty{
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    /*display: flex;*/
+    align-items: center;
+    justify-content: center;
+}
+
+ul,li{
+    list-style: none;
+}
+body{
+    color: #ffffff;
+}
+.left-table-nav aside{
+    background: #fafafa17;
+    width: 150px;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+}
+.left-table-nav aside li{
+    padding: 10px;
+    cursor: pointer;
+}
+.left-table-nav aside li:nth-last-child(1){
+    display: flex;
+    justify-content: center;
+}
+.left-table-nav aside li:hover{
+    background: #00000040;
+}
+.config{
+    margin-left: 160px;
+}
+.el-tabs__item{
+    color: #ffffff;
+}
+.el-table{
+    background: #ffffff00;
+}
+.el-table tr{
+    background: #ffffff00;
+}
+.el-table th.el-table__cell{
+    background: none;
+}
+.table header{
+    display: flex;
+    background: #ffffff14;
+    padding: 7px 7px;
+    border-radius: 7px 7px 0px 0px;
+}
+.table header li{
+    flex: 1;
+}
+.table  .table-body li{
+    display: flex;
+}
+.table  .table-body li span{
+    flex: 1;
+    display: inline-block;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding: 6px 3px;
+}
+.table  .table-body li span:nth-of-type(1){
+    padding-left: 0px;
+}
+.table  .table-body li span input{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    outline: none;
+    background: #00000014;
+    border: navajowhite;
+    color: #ffffff;
+    transition: all 0.5s;
+}
+.table  .table-body li span input:focus{
+    box-shadow: 0px 2px 9px 1px #00000066;
+
+}
+.list-bottom-add{
+    display: flex;
+    justify-content: center;
+    background: #30b9948f;
+}
+.el-descriptions__body{
+    background: #fafafa2e;
+}
+.el-descriptions__body .el-descriptions__table.is-bordered .el-descriptions__cell{
+    border: none;
+}
+.el-descriptions__label.el-descriptions__cell.is-bordered-label{
+    background: #ffffff29;
+}
+.el-descriptions__label.el-descriptions__cell.is-bordered-label{
+    color: #ffffff;
+}

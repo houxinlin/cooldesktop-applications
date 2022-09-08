@@ -1,0 +1,58 @@
+import java.nio.file.Files
+import java.nio.file.Paths
+
+plugins {
+    id 'java'
+}
+
+group 'com.hxl.hotswap'
+version '1.0-SNAPSHOT'
+
+jar.archiveName("hotswap-agent.jar")
+repositories {
+    mavenCentral()
+}
+jar {
+
+    manifest {
+        attributes 'Main-Class': 'com.hxl.Main'
+    }
+
+    from{
+        configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }.collect {
+            zipTree(it)
+        }
+    }
+}
+jar.manifest {
+    attributes(
+            "Premain-Class":"com.hxl.hotswap.Premain",
+            "Agent-Class": "com.hxl.hotswap.Premain",
+            "Can-Redefine-Classes":true,
+            "Can-Retransform-Classes":true
+    )
+}
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+    //反编译
+    implementation(files("/home/HouXinLin/projects/java/jd-core/build/libs/jd-core-1.1.4.jar"))
+    //cooldesktop rmi
+    implementation(files(("/home/HouXinLin/projects/java/cool/cooldesktop-apps/cooldesktop-app-rmi-info/cooldesktop-app-rmi-info/build/libs/cooldesktop-app-rmi-info-1.0-SNAPSHOT.jar")))
+}
+jar{
+   doLast{
+       copy {
+           from(file("/home/HouXinLin/projects/java/cool/cooldesktop-apps/hotswap-agent/build/libs/hotswap-agent.jar"))
+           into(file("/home/HouXinLin/projects/java/cool/cooldesktop-apps/jar-process-manager/work/"))
+       }
+       copy {
+           from(file("/home/HouXinLin/projects/java/cool/cooldesktop-apps/hotswap-agent/build/libs/hotswap-agent.jar"))
+           into(file("/home/HouXinLin/projects/java/cool/cooldesktop-apps/jar-process-manager/src/main/resources/static"))
+       }
+   }
+}
+test {
+    useJUnitPlatform()
+}

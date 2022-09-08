@@ -1,0 +1,48 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.0'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.cooldesktop.app'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation(files("//home/HouXinLin/apps/developer-apps/java/jdk/jdk8/lib/tools.jar"))
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation(files(("/home/HouXinLin/projects/java/cool/cooldesktop-apps/cooldesktop-app-rmi-info/cooldesktop-app-rmi-info/build/libs/cooldesktop-app-rmi-info-1.0-SNAPSHOT.jar")))
+// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf:2.7.3")
+
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+tasks.jar{
+    entryCompression=ZipEntryCompression.STORED
+    duplicatesStrategy=DuplicatesStrategy.EXCLUDE
+}
+jar{
+    doLast{
+        copy {
+            from(file("/home/HouXinLin/projects/java/cool/cooldesktop-apps/jar-process-manager/build/libs/jar-process-manager-0.0.1-SNAPSHOT-plain.jar"))
+            into(file("/home/hxl/cooldesktop-work/app/easy/"))
+        }
+    }
+}
